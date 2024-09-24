@@ -1,0 +1,6 @@
+@Uploader_HostAddress = http://localhost:5256
+
+GET {{Uploader_HostAddress}}/UploaderController/
+Accept: application/json
+
+###
