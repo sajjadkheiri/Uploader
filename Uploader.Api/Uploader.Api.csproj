@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Uploader.ApplicationService\Uploader.ApplicationService.csproj" />
+    <ProjectReference Include="..\Uploader.Persistance\Uploader.Persistance.csproj" />
   </ItemGroup>
 
 </Project>
