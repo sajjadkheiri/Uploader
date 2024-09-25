@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uploader.Api", "Uploader.Api\Uploader.Api.csproj", "{166ABF20-C036-4483-BFA0-7BBEAA83969A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uploader.Persistance", "Uploader.Persistance\Uploader.Persistance.csproj", "{D30DD40F-D5F1-47C4-AE12-E2A30546227C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uploader.Persistance", "ExcelUploader.Persistance\Uploader.Persistance.csproj", "{D30DD40F-D5F1-47C4-AE12-E2A30546227C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader.ApplicationService", "Uploader.ApplicationService\Uploader.ApplicationService.csproj", "{1D123E79-635F-4553-905C-9C5D6885244B}"
 EndProject

@@ -16,7 +16,7 @@ namespace Uploader.Persistance
         {
             services.AddDbContext<UploaderDbContext>(options =>
             {
-                options.UseSqlServer("Server=.;Initial catalog=ConfigSampleDb;User=sa;Password=1qaz@WSX;TrustServerCertificate=True;");
+                options.UseSqlServer("Server=.;Initial catalog=UploaderDb;User=sa;Password=1qaz@WSX;TrustServerCertificate=True;");
             });
 
             services.AddScoped<IEmployeeRepository,EmployeeRepository>();
