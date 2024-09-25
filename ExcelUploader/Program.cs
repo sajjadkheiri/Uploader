@@ -1,14 +1,21 @@
 using System.Reflection;
-using ExcelUploader.Dal;
-using Hangfire;
-using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
+using Uploader.ApplicationService;
+using Uploader.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+//builder.Services.AddDbContext<UploaderDbContext>(options =>
+//{
+//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+//});
+
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistanceServices();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -39,12 +46,9 @@ void ConfigureAdditionalServices()
 
     var services = builder.Services;
 
-    services.AddDbContext<UploaderDbContext>(options =>
-        options.UseSqlServer(connectionString));
+    //services.AddDbContext<UploaderDbContext>(options =>
+    //    options.UseSqlServer(connectionString));
 
-    // Add Hangfire
-    services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
-    services.AddHangfireServer();
 
     // Set the license context for openXml
     ExcelPackage.LicenseContext = LicenseContext.NonCommercial;

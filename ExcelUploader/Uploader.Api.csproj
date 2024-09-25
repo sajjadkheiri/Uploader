@@ -7,17 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExcelUploader.Dal\ExcelUploader.Dal.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.3.2" />
-    <PackageReference Include="Hangfire" Version="1.8.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ExcelFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Uploader.ApplicationService\Uploader.ApplicationService.csproj" />
   </ItemGroup>
 
 </Project>

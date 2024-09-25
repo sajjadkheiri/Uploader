@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using ExcelUploader;
-using Hangfire;
 using Uploader.Checking;
+using Uploader.ApplicationService.Dto;
+using Uploader.ApplicationService.Services.Employee;
+using Uploader.ApplicationService.Services.ExcelUploader;
 
 namespace Uploader.Controllers
 {
@@ -10,37 +11,39 @@ namespace Uploader.Controllers
     public class UploaderController : ControllerBase
     {
         private readonly ILogger<UploaderController> _logger;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly IEmployeeService _employeeService;
+        private readonly IExcelUploaderService _excelUploaderService;
 
-        public UploaderController(ILogger<UploaderController> logger, IServiceProvider serviceProvider)
+        public UploaderController(ILogger<UploaderController> logger,
+                                  IExcelUploaderService excelUploaderService,
+                                  IEmployeeService employeeService)
         {
-            _logger = logger;
-            _serviceProvider = serviceProvider;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
+            _excelUploaderService = excelUploaderService ?? throw new ArgumentNullException(nameof(excelUploaderService));
         }
 
-        /// <summary>
-        /// Inserts uploading excel file's content asynchronously to database using Hangfire background worker.
-        /// </summary>
-        /// <param name="file">Should be excel file with "xls, xlsx" extensions.</param>
-        /// <returns>If the file is a valid excel file and the job is added, it returns successful state.</returns>
         [HttpPost("upload-file")]
         public async Task<IActionResult> UploadExcelFile(IFormFile file)
         {
             try
             {
                 var checkRules = CheckExcelFile(file, out var actionResult);
-                
+
                 if (!checkRules)
                     return actionResult;
 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "ExcelFiles", file.FileName);
+                var fileByteArray = ConvertFormFileToByteArray(file);
 
-                await using (var stream = new FileStream(filePath, FileMode.Create))
+                ExcelFileInputDto excelFileInputDto = new ExcelFileInputDto()
                 {
-                    await file.CopyToAsync(stream);
-                }
+                    File = fileByteArray,
+                    FileName = file.FileName,
+                    FilePath = Path.Combine(Directory.GetCurrentDirectory(), "ExcelFiles", file.FileName)
+                };
 
-                BackgroundJob.Enqueue(() => new ExcelProcessor(_serviceProvider).ProcessExcelFile(filePath));
+                await _excelUploaderService.UploadFileAsync(excelFileInputDto);
+
 
                 return Ok("File uploaded successfully.");
             }
@@ -48,6 +51,16 @@ namespace Uploader.Controllers
             {
                 _logger.Log(LogLevel.Error, exception.Message);
                 return Problem("Unknown error occurred.");
+            }
+        }
+
+        private static byte[] ConvertFormFileToByteArray(IFormFile formFile)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                formFile.CopyToAsync(memoryStream);
+
+                return memoryStream.ToArray();
             }
         }
 

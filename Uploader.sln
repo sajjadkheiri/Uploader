@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader", "ExcelUploader\Uploader.csproj", "{166ABF20-C036-4483-BFA0-7BBEAA83969A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uploader.Api", "ExcelUploader\Uploader.Api.csproj", "{166ABF20-C036-4483-BFA0-7BBEAA83969A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelUploader.Dal", "ExcelUploader.Dal\ExcelUploader.Dal.csproj", "{D30DD40F-D5F1-47C4-AE12-E2A30546227C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Uploader.Persistance", "ExcelUploader.Dal\Uploader.Persistance.csproj", "{D30DD40F-D5F1-47C4-AE12-E2A30546227C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader.ApplicationService", "Uploader.ApplicationService\Uploader.ApplicationService.csproj", "{1D123E79-635F-4553-905C-9C5D6885244B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader.Domain", "Uploader.Domain\Uploader.Domain.csproj", "{82641AB0-7825-43E3-AEBF-2F1781EDC5E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader.WindowsService", "Uploader.WindowsService\Uploader.WindowsService.csproj", "{205A286B-8FDE-490D-817D-5A6A6F98BBAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{D30DD40F-D5F1-47C4-AE12-E2A30546227C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D30DD40F-D5F1-47C4-AE12-E2A30546227C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D30DD40F-D5F1-47C4-AE12-E2A30546227C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D123E79-635F-4553-905C-9C5D6885244B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D123E79-635F-4553-905C-9C5D6885244B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D123E79-635F-4553-905C-9C5D6885244B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D123E79-635F-4553-905C-9C5D6885244B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82641AB0-7825-43E3-AEBF-2F1781EDC5E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82641AB0-7825-43E3-AEBF-2F1781EDC5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82641AB0-7825-43E3-AEBF-2F1781EDC5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82641AB0-7825-43E3-AEBF-2F1781EDC5E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205A286B-8FDE-490D-817D-5A6A6F98BBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205A286B-8FDE-490D-817D-5A6A6F98BBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205A286B-8FDE-490D-817D-5A6A6F98BBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205A286B-8FDE-490D-817D-5A6A6F98BBAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
