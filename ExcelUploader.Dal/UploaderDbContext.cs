@@ -10,11 +10,6 @@ namespace ExcelUploader.Dal
         {
         }
 
-        public DbSet<Employee> employees { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=myserver;Database=mydatabase;User Id=myuser;Password=mypassword;");
-        }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
