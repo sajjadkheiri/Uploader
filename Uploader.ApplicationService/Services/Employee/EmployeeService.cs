@@ -33,12 +33,14 @@ namespace Uploader.ApplicationService.Services.Employee
                     await _unitOfWork.EmployeeRepository.AddAsync(new Domain.Entities.Employee.Employee(employee.FirstName, employee.LastName));
                 }
             }
-       
+
             await _unitOfWork.CompleteAsync();
         }
 
         public async Task BulkProcessItems()
         {
+            List<Task> tasks = new List<Task>();
+
             var items = await _unitOfWork.EmployeeRepository.GetUnprocessedItems();
 
             foreach (var item in items)
@@ -49,7 +51,7 @@ namespace Uploader.ApplicationService.Services.Employee
                 var rowCount = worksheet.Dimension.Rows;
 
                 var entities = new List<Domain.Entities.Employee.Employee>();
-                
+
                 for (int i = 2; i <= rowCount; i++)
                 {
                     var employee = new Domain.Entities.Employee.Employee(Convert.ToString(worksheet.Cells[i, 1].Value)!.Trim(),
@@ -62,11 +64,11 @@ namespace Uploader.ApplicationService.Services.Employee
 
                 foreach (var chunk in chunks)
                 {
-                    var task = _unitOfWork.EmployeeRepository.AddRangeAsync(chunk);
-
-                    await Task.WhenAll(task);
+                    tasks.Add(_unitOfWork.EmployeeRepository.AddRangeAsync(chunk));
                 }
             }
+
+            await Task.WhenAll(tasks);
 
             await _unitOfWork.CompleteAsync();
         }

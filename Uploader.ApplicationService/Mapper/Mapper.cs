@@ -13,7 +13,7 @@ namespace Uploader.ApplicationService.Mapper
     {
         public static ExcelFile Map(this ExcelFileInputDto dto)
         {
-            return new ExcelFile(dto.FileName, dto.File, dto.FilePath);
+            return new ExcelFile(dto.FileName, dto.File, dto.FilePath, dto.IsProcessed);
         }
 
         public static Employee Map(this EmployeeInputDto dto)
@@ -28,6 +28,7 @@ namespace Uploader.ApplicationService.Mapper
                 File = dto.File,
                 FileName = dto.FileName,
                 FilePath = dto.FilePath,
+                IsProcessed = dto.IsProcessed
             };
         }
 

@@ -6,5 +6,6 @@ namespace Uploader.ApplicationService.Dto
         public string FileName { get; set; }
         public byte[] File { get; set; }
         public string FilePath { get; set; }
+        public bool IsProcessed { get; set; }
     }
 }

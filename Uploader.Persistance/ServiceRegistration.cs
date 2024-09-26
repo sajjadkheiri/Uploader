@@ -19,8 +19,8 @@ namespace Uploader.Persistance
                 options.UseSqlServer("Server=.;Initial catalog=UploaderDb;User=sa;Password=1qaz@WSX;TrustServerCertificate=True;");
             });
 
-            services.AddScoped<IEmployeeRepository,EmployeeRepository>();
-            services.AddScoped<IExcelFileRepository, ExcelFileRepository>();
+            // services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            // services.AddScoped<IExcelFileRepository, ExcelFileRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

@@ -9,21 +9,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//builder.Services.AddDbContext<UploaderDbContext>(options =>
-//{
-//    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-//});
-
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistanceServices();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    options.IncludeXmlComments(xmlPath);
-});
+
+builder.Services.AddSwaggerGen(c =>
+       {
+           c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Uploader Api", Version = "v1" });
+       });
 
 ConfigureAdditionalServices();
 
@@ -38,18 +32,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
+
 app.Run();
 
 void ConfigureAdditionalServices()
 {
-    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
     var services = builder.Services;
 
-    //services.AddDbContext<UploaderDbContext>(options =>
-    //    options.UseSqlServer(connectionString));
-
-
-    // Set the license context for openXml
     ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 }

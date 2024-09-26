@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Uploader.Checking;
 using Uploader.ApplicationService.Dto;
-using Uploader.ApplicationService.Services.Employee;
 using Uploader.ApplicationService.Services.ExcelUploader;
 
 namespace Uploader.Controllers
@@ -11,15 +10,12 @@ namespace Uploader.Controllers
     public class UploaderController : ControllerBase
     {
         private readonly ILogger<UploaderController> _logger;
-        private readonly IEmployeeService _employeeService;
         private readonly IExcelUploaderService _excelUploaderService;
 
         public UploaderController(ILogger<UploaderController> logger,
-                                  IExcelUploaderService excelUploaderService,
-                                  IEmployeeService employeeService)
+                                  IExcelUploaderService excelUploaderService)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
             _excelUploaderService = excelUploaderService ?? throw new ArgumentNullException(nameof(excelUploaderService));
         }
 
@@ -88,8 +84,4 @@ namespace Uploader.Controllers
             return true;
         }
     }
-
-
-
-
 }

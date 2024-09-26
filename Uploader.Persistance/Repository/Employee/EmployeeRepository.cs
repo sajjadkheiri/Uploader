@@ -9,7 +9,7 @@ namespace Uploader.Persistance.Repository.Employee
 
         public EmployeeRepository(UploaderDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public async Task<List<Domain.Entities.ExcelFile.ExcelFile>> GetUnprocessedItems()
